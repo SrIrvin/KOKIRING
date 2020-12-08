@@ -63,7 +63,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Entornos\Zanahoria.cs" />
+    <Compile Include="Assets\Menuprincipal.cs" />
+    <Compile Include="Assets\Nivel0.cs" />
     <Compile Include="Assets\Ply\MovPly.cs" />
+    <Compile Include="Assets\UI\MenuPausa.cs" />
+    <None Include="Assets\Entornos\Shaders\MyShader.shader" />
+    <None Include="Assets\Entornos\Shaders\Iluminar .shader" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity Verciones/2019 4 6/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

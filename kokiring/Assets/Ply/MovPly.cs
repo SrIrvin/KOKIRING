@@ -30,13 +30,13 @@ public class MovPly : MonoBehaviour
     {
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
-
-
         Vector3 dir = new Vector3(horizontal, 0.0f, vertical).normalized;
 
-
+        //Animaciones
         anim.SetBool("caminar", dir.magnitude >= 0.1f);
         anim.SetBool("jump",  DiretionY>-5 && Input.GetKeyDown(KeyCode.Space));
+
+
 
         if (chrCtrl.isGrounded) { grav = 0; DiretionY = -0.1f; }
         else grav = 9.3f;
