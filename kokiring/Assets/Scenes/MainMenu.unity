@@ -222,7 +222,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 11654852}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1290859049}
+        m_MethodName: cerrar
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &11654852
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -701,7 +712,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1111477355}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1290859049}
+        m_MethodName: cargar
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Nivel0
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1111477355
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1128,7 +1150,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1290859049}
-        m_MethodName: CambEce
+        m_MethodName: nuevo
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

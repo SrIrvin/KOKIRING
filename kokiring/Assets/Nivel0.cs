@@ -12,7 +12,10 @@ public class Nivel0 : MonoBehaviour
 
     void Start()
     {
-        puntos = GetComponent<SaveData>().LoadKey<int>("los puntos");
+        if (PlayerPrefs.HasKey("save"))
+            if (PlayerPrefs.GetInt("save") == 1)
+                puntos = GetComponent<SaveData>().LoadKey<int>("los puntos");
+            else puntos = 0;
     }
 
     // Update is called once per frame
@@ -26,5 +29,11 @@ public class Nivel0 : MonoBehaviour
     }
     public void savePuntos() {
         GetComponent<SaveData>().Save<int>(puntos,"los puntos");
+        Transform tr= GameObject.Find("Ply").GetComponent<Transform>();
+        GetComponent<SaveData>().Save<string>(tr.position + new Vector3(0,.5f,0) + "", "player"); ;
+
     }
+
+
+
 }

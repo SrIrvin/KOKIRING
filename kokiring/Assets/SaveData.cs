@@ -35,7 +35,7 @@ public class SaveData : MonoBehaviour
     }
 
 
-    public static bool ExistFile(string key) {
+    public bool ExistFile(string key) {
         return (File.Exists(Application.persistentDataPath + "/Draws/" + key + ".pdf"));
     }
 
@@ -45,6 +45,27 @@ public class SaveData : MonoBehaviour
         DirectoryInfo directory = new DirectoryInfo(path);
         directory.Delete();
         Directory.CreateDirectory(path);
+    }
+
+
+    public  Vector3 StringToVector3(string sVector)
+    {
+        // Remove the parentheses
+        if (sVector.StartsWith("(") && sVector.EndsWith(")"))
+        {
+            sVector = sVector.Substring(1, sVector.Length - 2);
+        }
+
+        // split the items
+        string[] sArray = sVector.Split(',');
+
+        // store as a Vector3
+        Vector3 result = new Vector3(
+            float.Parse(sArray[0])/10,
+            float.Parse(sArray[1])/10,
+            float.Parse(sArray[2])/10);
+
+        return result;
     }
 
 }

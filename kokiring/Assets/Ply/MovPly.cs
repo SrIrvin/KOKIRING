@@ -23,6 +23,13 @@ public class MovPly : MonoBehaviour
         chrCtrl = GetComponent<CharacterController>();
         tr = GetComponent<Transform>();
         anim = GetComponent<Animator>();
+        var data= GetComponent<SaveData>();
+        if( PlayerPrefs.HasKey("save") )
+        if (PlayerPrefs.GetInt("save") == 1 && data.ExistFile("player") )
+        {
+            string pos = data.LoadKey<string>("player");
+            tr.transform.position = data.StringToVector3(pos) ;
+        }
     }
 
     // Update is called once per frame
@@ -34,11 +41,11 @@ public class MovPly : MonoBehaviour
 
         //Animaciones
         anim.SetBool("caminar", dir.magnitude >= 0.1f);
-        anim.SetBool("jump",  DiretionY>-5 && Input.GetKeyDown(KeyCode.Space));
+        anim.SetBool("jump",  DiretionY>-5 && Input.GetButtonDown("Jump"));
 
 
 
-        if (chrCtrl.isGrounded) { grav = 0; DiretionY = -0.1f; }
+        if (chrCtrl.isGrounded) { grav = 0.1F; DiretionY = -0.1f; }
         else grav = 9.3f;
 
 
@@ -48,7 +55,7 @@ public class MovPly : MonoBehaviour
             float angl = Mathf.SmoothDampAngle(tr.eulerAngles.y, targetangle,ref turnSmoothVel, turnSmoothTime);
             Vector3 moveDir = Quaternion.Euler(0.0f, targetangle, 0.0f) * Vector3.forward;
 
-            if (Input.GetKeyDown( KeyCode.Space   ) && chrCtrl.isGrounded )
+            if (Input.GetButtonDown ("Jump") && chrCtrl.isGrounded )
             {
                 DiretionY = jumpspeed;
             }
