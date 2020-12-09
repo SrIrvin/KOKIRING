@@ -8,5 +8,6 @@ public class Menuprincipal : MonoBehaviour
     public void CambEce(string ecena) {
         SceneManager.LoadScene(ecena,LoadSceneMode.Single );
     }
+    
 
 }

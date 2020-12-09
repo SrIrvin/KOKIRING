@@ -9,9 +9,10 @@ public class Nivel0 : MonoBehaviour
     public static int puntos=0;
 
 
+
     void Start()
     {
-        
+        puntos = GetComponent<SaveData>().LoadKey<int>("los puntos");
     }
 
     // Update is called once per frame
@@ -22,5 +23,8 @@ public class Nivel0 : MonoBehaviour
     public void addScore()
     {
         puntos++;
+    }
+    public void savePuntos() {
+        GetComponent<SaveData>().Save<int>(puntos,"los puntos");
     }
 }
