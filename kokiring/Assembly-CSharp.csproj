@@ -63,12 +63,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Entornos\Zanahoria.cs" />
-    <Compile Include="Assets\Menuprincipal.cs" />
-    <Compile Include="Assets\Nivel0.cs" />
     <Compile Include="Assets\Ply\MovPly.cs" />
-    <Compile Include="Assets\SaveData.cs" />
-    <Compile Include="Assets\TerminarDemo.cs" />
+    <Compile Include="Assets\Scripts\Menuprincipal.cs" />
+    <Compile Include="Assets\Scripts\Nivel0.cs" />
+    <Compile Include="Assets\Scripts\SaveData.cs" />
+    <Compile Include="Assets\Scripts\TerminarDemo.cs" />
+    <Compile Include="Assets\Scripts\Zanahoria.cs" />
+    <Compile Include="Assets\Scripts\ZanahoriaHije.cs" />
     <Compile Include="Assets\UI\MenuPausa.cs" />
     <None Include="Assets\Entornos\Shaders\MyShader.shader" />
     <None Include="Assets\Entornos\Shaders\Iluminar .shader" />

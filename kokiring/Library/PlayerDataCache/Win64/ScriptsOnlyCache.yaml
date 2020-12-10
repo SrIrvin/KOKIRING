@@ -8,6 +8,7 @@ ScriptsOnlyBuild:
     - SaveData
     - TerminarDemo
     - Zanahoria
+    - ZanahoriaHije
     Cinemachine.dll:
     - Cinemachine.CinemachineBrain
     - Cinemachine.CinemachineCollider
@@ -297,6 +298,8 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12070}
     - Class: 114
+      Script: {instanceID: 12090}
+    - Class: 114
       Script: {instanceID: 12170}
     - Class: 114
       Script: {instanceID: 12236}
@@ -322,6 +325,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 13462}
     - Class: 114
       Script: {instanceID: 13488}
+    - Class: 114
+      Script: {instanceID: 21014}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -407,7 +412,7 @@ ScriptsOnlyBuild:
     className: TMP_Dropdown
   - hash:
       serializedVersion: 2
-      Hash: e36eb925de4dbdf5054812eacc1f3afd
+      Hash: 9ddc46937770daff28dfa777f1af6bcd
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: MovPly
@@ -1221,9 +1226,15 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
+  - hash:
+      serializedVersion: 2
+      Hash: 62ba3e94685dda48adf62cba9dc3f052
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ZanahoriaHije
   platform: 19
   scenePathNames:
   - Assets/Scenes/MainMenu.unity
   - Assets/Scenes/Nivel0.unity
   - Assets/Scenes/AnimacionFinal.unity
-  playerPath: C:/Users/sr_ir/Desktop/Proyecto AMBER/Exporta4/kokiring.exe
+  playerPath: C:/Users/sr_ir/Desktop/Proyecto AMBER/KOKIRING Pre-Alpha v0.5/KOKIRING.exe

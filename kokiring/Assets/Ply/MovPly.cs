@@ -2,24 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Script de movimiento del jugador.
 public class MovPly : MonoBehaviour
 {
-    private CharacterController chrCtrl;
+    // Componentes del GameObjet a utilizar
+    private CharacterController chrCtrl; 
     private Transform tr;
     private Animator anim;
     
    
 
-    public Transform cam;
-    public float vel = 10;
-    public float turnSmoothTime = 0.9f;
-    float turnSmoothVel;
-    public float grav = 9.6f;
-    public float jumpspeed = 3.5f;
-    public float DiretionY=0;
+    public Transform cam;               // Pocicion de la camara.
+    public float dafaultVel = 20;       // Velocidad por defento
+    public float vel;                   // Velocidad aplicada
+    public float turnSmoothTime = 0.9f; // Indice de suabisado de de rotación 
+    float turnSmoothVel;                // Indice de suabisado de celocidad
+    public float grav = 9.6f;           // Gravedad aplicada
+    public float jumpspeed = 3.5f;      // Indice de salto
+    public float DiretionY=0;           // Ayuda a guradar ultimo indice de movimiento aplicado en "grav" .
  
     void Start()
     {
+        vel = dafaultVel;
         chrCtrl = GetComponent<CharacterController>();
         tr = GetComponent<Transform>();
         anim = GetComponent<Animator>();
@@ -38,64 +42,72 @@ public class MovPly : MonoBehaviour
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
         Vector3 dir = new Vector3(horizontal, 0.0f, vertical).normalized;
+
         if (Input.GetKey(KeyCode.LeftShift ) && vel<60) {
             vel += 1;
-        } else vel = 20;
+        } else vel = dafaultVel;
 
-        //Animaciones
-        anim.SetBool("caminar", dir.magnitude >= 0.1f);
-        //anim.SetBool("jump",  DiretionY>-5 && Input.GetButtonDown("Jump"));
-        anim.SetBool("jump", !chrCtrl.isGrounded);
-
-
-        if (chrCtrl.isGrounded) { grav = 0.1F; DiretionY = -0.1f; }
+        if (chrCtrl.isGrounded) { grav = 0.1f; DiretionY = -0.1f; }
         else grav = 9.3f;
 
 
+        anim.SetBool("caminar", dir.magnitude >= 0.1f);
+        anim.SetBool("jump", !chrCtrl.isGrounded);
+
         if (dir.magnitude >= 0.1f || !chrCtrl.isGrounded)
         {
-            float targetangle;
-            if (Input.GetAxis("Vertical") < 0.0f)
+            
+            float targetAngle;
+            if ( vertical < 0.0f && horizontal==0 )
             {
-                targetangle = Mathf.Atan2(-dir.x, -dir.y) * Mathf.Rad2Deg + cam.eulerAngles.y;
+                targetAngle = Mathf.Atan2(-dir.x, -dir.y) * Mathf.Rad2Deg + cam.eulerAngles.y;
             }
             else
             {
-                targetangle = Mathf.Atan2(dir.x, dir.y) * Mathf.Rad2Deg + cam.eulerAngles.y;
-            }
-            float angl = Mathf.SmoothDampAngle(tr.eulerAngles.y, targetangle, ref turnSmoothVel, turnSmoothTime);
-            Vector3 moveDir = Quaternion.Euler(0.0f, targetangle, 0.0f) * Vector3.forward;
-
-            if (Input.GetButtonDown("Jump") && chrCtrl.isGrounded)
-            {
-                DiretionY = jumpspeed;
+                targetAngle = Mathf.Atan2(dir.x, dir.y) * Mathf.Rad2Deg + cam.eulerAngles.y;
             }
 
 
-            if (DiretionY > -5.2f)
-                DiretionY -= grav * Time.deltaTime;
+            float angl = Mathf.SmoothDampAngle(tr.eulerAngles.y, targetAngle, ref turnSmoothVel, turnSmoothTime);
+            Vector3 moveDir = Quaternion.Euler(0.0f, targetAngle, 0.0f) * Vector3.forward;
 
+            Salto();
+            Gravedad(false);
             moveDir.y = DiretionY;
 
             tr.transform.rotation = Quaternion.Euler(0.0f, angl, 0.0f);
             chrCtrl.Move(moveDir.normalized * vel * Time.deltaTime);
         }
         else {
-            if (Input.GetButtonDown("Jump") && chrCtrl.isGrounded)
-            {
-                DiretionY = jumpspeed;
-                anim.Play("callendo");
-            }
-
-
-            if (DiretionY > -5.2f)
-                DiretionY -= grav * Time.deltaTime;
-
-            chrCtrl.Move(new Vector3(0.0f, DiretionY, 0.0f) * vel * Time.deltaTime);
-
+            Salto();
+            Gravedad(true);
         }
        
         
 
+    }
+
+    // Suma velocidad
+    public void addVel(float plus) {
+        dafaultVel+=plus;
+    }
+
+    // Aplicar salto.
+    public void Salto() {
+        if (Input.GetButtonDown("Jump") && chrCtrl.isGrounded)
+        {
+            DiretionY = jumpspeed;
+            anim.Play("callendo");
+        }
+    }
+
+    // Aplicar Gravedad.
+    public void Gravedad(bool aply)
+    {
+        if (DiretionY > -5.2f)
+            DiretionY -= grav * Time.deltaTime;
+        if (aply)
+            chrCtrl.Move(new Vector3(0.0f, DiretionY, 0.0f) * vel * Time.deltaTime);
+        
     }
 }
